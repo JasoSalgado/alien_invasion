@@ -108,6 +108,23 @@ class AlienInvasion:
         # Print the bullets are being remove from the list. It is not necessary to print them. I am just doing it to see if works properly
         #print(len(self.bullets))
 
+        self._check_bullet_alien_collisions()
+
+       
+    def _check_bullet_alien_collisions(self):
+        """Respond to bullet-alien collisions"""    
+        # Remove anu bullets and aliens that have collided
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, True, True
+        )
+
+        if not self.aliens:
+            # Destroy existing bullets and create new fleet
+            self.bullets.empty()
+            self._create_fleet()
+
+
+
 
     def _create_fleet(self):
         """Create the fleet of aliens"""
@@ -160,6 +177,8 @@ class AlienInvasion:
         """Update the positions of all aliens in the fleet"""
         self._check_fleet_edges()
         self.aliens.update()
+
+        
 
 
 if __name__ == '__main__':
