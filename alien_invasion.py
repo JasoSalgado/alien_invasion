@@ -10,6 +10,7 @@ from bullet import Bullet
 from alien import Alien
 from game_stats import GameSats 
 from button import Button
+from scoreboard import Scoreboard
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior"""
@@ -28,6 +29,8 @@ class AlienInvasion:
 
         # Create an instance to store game statistics
         self.stats = GameSats(self)
+        # Create a scoreaboard
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -75,8 +78,10 @@ class AlienInvasion:
         """Start a new game when the player clicks Play"""
         # Game starts only when game_active is False
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-        if self.play_button.rect.collidepoint(mouse_pos):
+        # Reset
+        if button_clicked and not self.stats.game_active:
             # Reset the game statistics
+            self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True
 
@@ -89,7 +94,7 @@ class AlienInvasion:
             self.ship.center_ship()
 
             # Hide the mouse cursor
-            pygame.mouse.set_invisible(False)
+            pygame.mouse.set_visible(False)
     
 
     def _check_keydown_events(self, event):
@@ -122,7 +127,6 @@ class AlienInvasion:
             self.bullets.add(new_bullet)
     
 
-
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen"""
         # Redraw the screen during each pass through the loop
@@ -133,6 +137,9 @@ class AlienInvasion:
             bullet.draw_bullet()
         # Alien appears in the upper-left are of the screen
         self.aliens.draw(self.screen)
+
+        # Draw the score information
+        self.sb.show_score()
 
         # Draw the play button if the game is active
         if not self.stats.game_active:
@@ -162,6 +169,10 @@ class AlienInvasion:
         collisions = pygame.sprite.groupcollide(
             self.bullets, self.aliens, True, True
         )
+
+        if collisions:
+            self.stats.score += self.settings.alien_points
+            self.sb.prep_score()
 
         if not self.aliens:
             # Destroy existing bullets and create new fleet
