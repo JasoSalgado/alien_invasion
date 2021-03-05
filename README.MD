@@ -1,7 +1,6 @@
 ﻿# Alien Invasion Game 🐍 🚀
 
-## Content of project![play](https://user-images.githubusercontent.com/37636188/110186773-e77d7200-7ddb-11eb-986f-facacc700839.png)
-![play](https://user-images.githubusercontent.com/37636188/110186777-e9dfcc00-7ddb-11eb-9614-bd48dafa7ef7.png)
+## Content of project![play]
 
 
  - Aliens (js)
@@ -12,12 +11,14 @@
  - Lifes
  
  ## Images of the game
- ```git
-![alt text](readme_img/play.png)
-![alt text](readme_img/1.png)
-![alt text](readme_img/2.png)
-```
+
+![play](https://user-images.githubusercontent.com/37636188/110186823-054ad700-7ddc-11eb-92bb-f944aaff9998.png)
+
+![1](https://user-images.githubusercontent.com/37636188/110186838-0c71e500-7ddc-11eb-8acd-574ebcf40eeb.png)
+
+![3](https://user-images.githubusercontent.com/37636188/110186840-0ed43f00-7ddc-11eb-9f01-705bc1ff9e8a.png)
+
  
  ### References:
- Book: Django Project Blueprints
+ Book: Python Crash Course
 
